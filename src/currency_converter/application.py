@@ -1,18 +1,15 @@
 import logging
-from decimal import Decimal
-from xml.etree import ElementTree
 
 from tornado.httpclient import HTTPClient
 from tornado.ioloop import IOLoop
 from tornado.web import Application
 
+from currency_converter.conversion_map import ConversionMap
 from currency_converter.request.handler.currency import CurrencyConversionHandler
 
 API_ENDPOINTS = [
     (r"/api/v1/currency/conversion", CurrencyConversionHandler),
 ]
-
-NAMESPACES = {'ex': 'http://www.ecb.int/vocabulary/2002-08-01/eurofxref'}
 
 
 class ConverterApplication(Application):
@@ -53,15 +50,4 @@ class ConverterApplication(Application):
             http_client.close()
 
         self.logger.info("New rates fetched successfully!")
-        return self._parse_exchange_rate_xml(response.body)
-
-    def _parse_exchange_rate_xml(self, file_name):
-        self.logger.debug('Parsing XML')
-
-        root = ElementTree.fromstring(file_name)
-        parsed = {}
-
-        for cube in root.findall('.//ex:Cube[@time]', namespaces=NAMESPACES):
-            parsed[cube.attrib['time']] = {c.attrib['currency']: Decimal(c.attrib['rate']) for c in cube}
-
-        return parsed
+        return ConversionMap.from_xml_string(response.body, self.logger)

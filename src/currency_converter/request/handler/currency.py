@@ -7,23 +7,16 @@ from tornado.web import RequestHandler, HTTPError
 class CurrencyConversionHandler(RequestHandler):
     def get(self):
         src_currency, dest_currency, amount, reference_date = self._parse_arguments()
-
-        if reference_date not in self.application.rates:
-            self.application.logger.error("Date not found")
-            raise HTTPError(404, reason="Date not found")
-
-        src_rate = self.application.rates[reference_date].get(src_currency)
-        dest_rate = self.application.rates[reference_date].get(dest_currency)
-
+        converted_amount = self.application.rates.convert(src_currency, dest_currency, amount, reference_date)
         reponse = {
             'currency': dest_currency,
-            'amount': float(round((amount / src_rate) * dest_rate, 2))
+            'amount': converted_amount
         }
         self.write(reponse)
 
     def _parse_arguments(self):
-        src_currency = self.get_argument("from")
-        dest_currency = self.get_argument("to")
+        src_currency = self.get_argument("from").upper()
+        dest_currency = self.get_argument("to").upper()
         reference_date = self.get_argument("date")
         amount = self.get_argument("amount", 1)
 
