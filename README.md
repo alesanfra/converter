@@ -2,13 +2,16 @@
 The **currency converter** application provides a web API endpoint to perform online currency conversion, based on the official rates published by the ECB.
 
 The latest rates are retrieved at the application startup from the following endpoint:
-
-> https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml
+```
+https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml
+```
 
 ## API
 
 Base endpoint
-> http://localhost:8000/api/v1/currency/convert
+```
+http://localhost:8000/api/v1/currency/convert
+```
 
 Parameters:
 - **from**: source currency (e.g. USD)
@@ -17,7 +20,9 @@ Parameters:
 - **amount**: amount to convert (e.g. 42.42) (optional, default 1)
 
 Example:
-> curl 'http://localhost:8000/api/v1/currency/convert?from=USD&to=CHF&amount=42.42&date=2019-01-14'
+```
+curl 'http://localhost:8000/api/v1/currency/convert?from=USD&to=CHF&amount=42.42&date=2019-01-14'
+```
 
 
 ## Using Currency Converter
@@ -28,45 +33,63 @@ Requirements:
 
 To install pipenv using pip
 
-> pip install pipenv
+```
+pip install pipenv
+```
 
 ### Install
-
-> pipenv install --dev
+```
+pipenv install --dev
+```
 
 ### Run
 To run the **Currency Converter** as a process first enter the virtualenv
-> pipenv shell
+```
+pipenv shell
+```
 
 Run the process
-> PYTHONPATH=$PYTHONPATH:./src python bin/main.py
+```
+PYTHONPATH=$PYTHONPATH:./src python bin/main.py
+```
 
 
 
 ### Run in a docker container
 
 Build the docker image
-> docker build . -t currency_converter:latest
+```
+docker build . -t currency_converter:latest
+```
 
 Run a container exposing port 8000
-> docker run -p 8000:8000 currency_converter:latest
+```
+docker run -p 8000:8000 currency_converter:latest
+```
 
 ### Run unit tests
 Enter the virtualenv
-> pipenv shell
+```
+pipenv shell
+```
 
 Run test with **pytest**
-> PYTHONPATH=./src pytest test/unit/
-
+```
+PYTHONPATH=./src pytest test/unit/
+```
 
 
 ### Run integration tests
 
 Enter the virtualenv
-> pipenv shell
+```
+pipenv shell
+```
 
 Run integration tests with **robot framework**
-> PYTHONPATH=./test/integration robot --outputdir out test/integration/
+```
+PYTHONPATH=./test/integration robot --outputdir out test/integration/
+```
 
 
 
