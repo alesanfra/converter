@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 requests = "*"
 robotframework = "*"
+pytest = "*"
 
 [packages]
 tornado = "*"

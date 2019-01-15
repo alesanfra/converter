@@ -5,7 +5,7 @@ from tornado.ioloop import IOLoop
 from tornado.web import Application
 
 from currency_converter.conversion_map import ConversionMap
-from currency_converter.request.handler.currency import CurrencyConversionHandler
+from currency_converter.request.currency_handler import CurrencyConversionHandler
 
 API_ENDPOINTS = [
     (r"/api/v1/currency/conversion", CurrencyConversionHandler),
