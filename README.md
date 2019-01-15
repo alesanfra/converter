@@ -1,6 +1,10 @@
 # Currency converter
 The **currency converter** application provides a web API endpoint to perform online currency conversion, based on the official rates published by the ECB.
 
+The latest rates are retrieved at the application startup from the following endpoint:
+
+> https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml
+
 ## API
 
 Base endpoint
