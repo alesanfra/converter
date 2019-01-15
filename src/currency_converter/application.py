@@ -8,7 +8,7 @@ from currency_converter.conversion_map import ConversionMap
 from currency_converter.request.currency_handler import CurrencyConversionHandler
 
 API_ENDPOINTS = [
-    (r"/api/v1/currency/conversion", CurrencyConversionHandler),
+    (r"/api/v1/currency/convert", CurrencyConversionHandler),
 ]
 
 
@@ -23,7 +23,7 @@ class ConverterApplication(Application):
         logger = logging.getLogger(__name__)
         logging.basicConfig(
             level=logging.INFO,
-            format="[%(levelname)s %(asctime)s] %(message)s",
+            format="[%(asctime)s %(levelname)s] %(message)s",
             datefmt="%Y-%m-%d %H:%M:%S")
         return logger
 

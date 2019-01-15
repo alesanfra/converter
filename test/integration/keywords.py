@@ -17,13 +17,12 @@ def convert_currency(src_currency=None, dst_currency=None, amount=None, referenc
     if reference_date is not None:
         paramters['date'] = reference_date
 
-    response = requests.get(BASE_URL + 'currency/conversion', params=paramters, headers=DEFAULT_HEADERS)
+    response = requests.get(BASE_URL + 'currency/convert', params=paramters, headers=DEFAULT_HEADERS)
 
     if response.status_code != int(expected_status_code):
         raise AssertionError("Expected response code {}, received {}".format(expected_status_code,
                                                                              response.status_code))
     if response.status_code < 300:
-        print(response.content)
         return json.loads(response.content)
 
     return None
