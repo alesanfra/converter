@@ -1,7 +1,7 @@
 # Currency converter
 The **currency converter** application provides a web API endpoint to perform online currency conversion, based on the official rates published by the ECB.
 
-##API
+## API
 
 Base endpoint
 > http://localhost:8000/api/v1/currency/convert
