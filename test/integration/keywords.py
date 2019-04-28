@@ -3,7 +3,7 @@ import json
 import requests
 
 DEFAULT_HEADERS = {"Content-Type": "application/json"}
-BASE_URL = 'http://localhost:8000/api/v1/'
+BASE_URL = 'http://localhost:28027/api/v1/'
 
 
 def convert_currency(src_currency=None, dst_currency=None, amount=None, reference_date=None, expected_status_code=200):

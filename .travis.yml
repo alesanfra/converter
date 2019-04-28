@@ -2,11 +2,22 @@ dist: xenial   # required for Python >= 3.7
 language: python
 python:
   - "3.7"
+services:
+  - docker
 
 install:
-  - pip install pipenv
   - pipenv install --dev
 
-# command to run tests
-script:
-  - PYTHONPATH=./src pipenv run pytest test/unit/
+jobs:
+  include:
+    - stage: "Unit Tests"
+      script:
+        - PYTHONPATH=./src pipenv run pytest test/unit/
+    - stage: "Integration Tests"
+      script:
+        - docker build . -t currency_converter:latest
+        - docker run -d -p 127.0.0.1:28027:8000 currency_converter:latest
+        - docker ps -a
+        - sleep 10
+        - curl localhost:28027/api/v1/currency/convert
+        - PYTHONPATH=./test/integration pipenv run robot --outputdir out test/integration/
