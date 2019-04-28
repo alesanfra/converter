@@ -17,4 +17,5 @@ jobs:
       script:
         - docker build . -t currency_converter:latest
         - docker run -d -p 28027:8000 currency_converter:latest
+        - curl localhost:28027/api/v1/currency/convert
         - PYTHONPATH=./test/integration pipenv run robot --outputdir out test/integration/
