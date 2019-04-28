@@ -13,10 +13,8 @@ jobs:
     - stage: "Unit Tests"
       script:
         - PYTHONPATH=./src pipenv run pytest test/unit/
-    - stage: "Build"
-      script:
-        - docker build . -t currency_converter:latest
     - stage: "Integration Tests"
       script:
+        - docker build . -t currency_converter:latest
         - docker run -p 8000:8000 currency_converter:latest
         - PYTHONPATH=./test/integration pipenv run robot --outputdir out test/integration/
