@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/alesanfra/converter.svg?branch=master)](https://travis-ci.org/alesanfra/converter)
+
 # Currency converter
 The **currency converter** application provides a web API endpoint to perform online currency conversion, based on the official rates published by the ECB.
 
