@@ -22,7 +22,7 @@ Parameters:
 - **amount**: amount to convert (e.g. 42.42) (optional, default 1)
 
 Example:
-```
+```bash
 curl 'http://localhost:8000/api/v1/currency/convert?from=USD&to=CHF&amount=42.42&date=2019-01-14'
 ```
 
@@ -35,65 +35,40 @@ Requirements:
 
 To install pipenv using pip
 
-```
+```bash
 pip install pipenv
 ```
 
 ### Install
-```
+```bash
 pipenv install --dev
 ```
 
 ### Run
-To run the **Currency Converter** as a process first enter the virtualenv
+To run the **Currency Converter** as a process:
+```bash
+PYTHONPATH=$PYTHONPATH:./src pipenv run python bin/main.py
 ```
-pipenv shell
-```
-
-Run the process
-```
-PYTHONPATH=$PYTHONPATH:./src python bin/main.py
-```
-
-
 
 ### Run in a docker container
-
 Build the docker image
-```
+```bash
 docker build . -t currency_converter:latest
 ```
 
 Run a container exposing port 8000
-```
+```bash
 docker run -p 8000:8000 currency_converter:latest
 ```
 
 ### Run unit tests
-Enter the virtualenv
+Run tests with **pytest**
+```bash
+PYTHONPATH=./src pipenv run pytest test/unit/
 ```
-pipenv shell
-```
-
-Run test with **pytest**
-```
-PYTHONPATH=./src pytest test/unit/
-```
-
 
 ### Run integration tests
-
-Enter the virtualenv
-```
-pipenv shell
-```
-
 Run integration tests with **robot framework**
+```bash
+PYTHONPATH=./test/integration pipenv run robot --outputdir out test/integration/
 ```
-PYTHONPATH=./test/integration robot --outputdir out test/integration/
-```
-
-
-
-
-
